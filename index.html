@@ -1,82 +1,72 @@
-<!DOCTYPE HTML>
-<!--
-	Minimaxing by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>差旅查询系统</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body>
-		<div id="page-wrapper">
-
-			<!-- Header -->
-			<div id="header-wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="col-12">
-
-							<header id="header">
-								<h1><a href="index.html" id="logo">差旅查询系统</a></h1>
-								<nav id="nav">
-									<a href="index.html" class="current-page-item">差旅政策</a>
-									<a href="travel_standards.html">差旅标准</a>
-								</nav>
-							</header>
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Banner -->
-			<div id="banner-wrapper">
-				<div class="container">
-
-					<div id="banner">
-						<h2>差旅政策</h2>
-						<span>公司相关差旅政策、制度</span>
-					</div>
-					
-				</div>
-			</div>
-
-			<!-- Main -->
-			<div id="main">
-				<div class="container">
-					<div class="row main-row">
-						<div class="col-4 col-6-medium col-12-small">
-
-							<section>
-								<h2>有用的链接</h2>
-								<div>
-									<div class="row">
-										<div class="col-6 col-12-small">
-											<ul class="link-list">
-												<li><a href="#">最新政策</a></li>
-												<li><a href="#">相关通告</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</section>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
-
-	</body>
-</html>
+<html>  
+    <head> 
+        <title>s表格前端搜索</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=GBK"/>        
+    </head>  
+    <body>  
+    <h1>js表格前端搜索</h1>
+    
+    <label> <input type="radio" name="sex" value="男" onclick="onSearch(this.value,2)"/>男 </label>
+    <label><input type="radio" name="sex" value="女" onclick="onSearch(this.value,2)"/>女 </label>
+    
+        <table id="table1" border="1">  
+            <thead >  
+                    <tr style="cursor: pointer;">  
+                        <td class="listHeadCell">编号</td>  
+                        <td class="listHeadCell">姓名</td>  
+                        <td class="listHeadCell">性别</td>  
+                    </tr>  
+            </thead>  
+            <tbody id="gridtbody">  
+                <tr>  
+                    <td name="biaozhi">1</td>  
+                    <td>名称1</td>  
+                    <td>男</td> 
+                </tr>     
+                <tr>      
+                    <td name="biaozhi">2</td>  
+                    <td>名称2</td>  
+                    <td>男</td> 
+                </tr>     
+                <tr>      
+                    <td name="biaozhi">3</td>  
+                    <td>名称3</td>  
+                    <td>女</td> 
+                </tr>     
+                <tr>      
+                    <td name="biaozhi">4</td>  
+                    <td>名称4</td>  
+                    <td>男</td> 
+                </tr>  
+            </tbody>  
+        </table>  
+        <br/>  
+        
+        <script type="text/javascript">  
+             /**
+             * js 前台搜索
+             * @param searchContent 搜索的内容
+             * @col 要搜索的哪一列，这里是第一列，从0开始数起  
+             */
+            function onSearch(searchContent,col){
+                setTimeout(function(){//因为是即时查询，需要用setTimeout进行延迟，让值写入到input内，再读取  
+                    var storeId = document.getElementById('table1');//获取table的id标识  
+                    var rowsLength = storeId.rows.length;//表格总共有多少行  
+              
+                    var searchCol = col;//要搜索的哪一列，这里是第一列，从0开始数起  
+              
+                    for(var i=1;i<rowsLength;i++){//按表的行数进行循环，本例第一行是标题，所以i=1，从第二行开始筛选（从0数起）  
+                        
+                        var searchText = storeId.rows[i].cells[searchCol].innerHTML;//取得table行，列的值  
+                        //alert(searchText);
+                        if(searchText.match(searchContent) || searchText.toUpperCase().match(searchContent.toUpperCase())){//用match函数进行筛选，如果input的值，即变量 key的值为空，返回的是ture，  
+                            storeId.rows[i].style.display='';//显示行操作，  
+                        }else{  
+                            storeId.rows[i].style.display='none';//隐藏行操作  
+                        }  
+                    }  
+                },20);//20为延时时间  
+            }   
+        </script>  
+    </body>  
+</html>  
